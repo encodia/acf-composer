@@ -3,7 +3,7 @@
 namespace DummyNamespace;
 
 use Log1x\AcfComposer\Block;
-use StoutLogic\AcfBuilder\FieldsBuilder;
+use Log1x\AcfComposer\Builder;
 
 class DummyClass extends Block
 {
@@ -117,17 +117,7 @@ class DummyClass extends Block
      *
      * @var array
      */
-    public $styles = [
-        [
-            'name' => 'light',
-            'label' => 'Light',
-            'isDefault' => true,
-        ],
-        [
-            'name' => 'dark',
-            'label' => 'Dark',
-        ]
-    ];
+    public $styles = ['light', 'dark'];
 
     /**
      * The block preview example data.
@@ -154,10 +144,8 @@ class DummyClass extends Block
 
     /**
      * Data to be passed to the block before rendering.
-     *
-     * @return array
      */
-    public function with()
+    public function with(): array
     {
         return [
             'items' => $this->items(),
@@ -166,12 +154,10 @@ class DummyClass extends Block
 
     /**
      * The block field group.
-     *
-     * @return array
      */
-    public function fields()
+    public function fields(): array
     {
-        $DummyCamel = new FieldsBuilder('DummySnake');
+        $DummyCamel = Builder::make('DummySnake');
 
         $DummyCamel
             ->addRepeater('items')
@@ -182,7 +168,7 @@ class DummyClass extends Block
     }
 
     /**
-     * Return the items field.
+     * Retrieve the items.
      *
      * @return array
      */
@@ -192,11 +178,9 @@ class DummyClass extends Block
     }
 
     /**
-     * Assets to be enqueued when rendering the block.
-     *
-     * @return void
+     * Assets enqueued when rendering the block.
      */
-    public function enqueue()
+    public function assets(array $block): void
     {
         //
     }
